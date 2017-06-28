@@ -1,0 +1,36 @@
+@prefix elmo: <http://bp4mc2.org/elmo/def#>.
+@prefix stage: <http://localhost:8080/myStage#>.
+
+stage:WeergaveDMN a elmo:InformationProduct;
+    elmo:adapter 'virtuoso';
+    elmo:query '''
+		prefix container: <http://localhost:8080/toepasbareregels/container/>
+		prefix dmn: <http://www.omg.org/spec/DMN/20151101/dmn#>
+
+		CONSTRUCT {
+			<@SUBJECT@> ?p ?o.
+		}
+		WHERE {
+			{
+				<@SUBJECT@> ?p ?o.
+				OPTIONAL {
+					<@SUBJECT@> rdfs:label ?subject_label.
+				}
+				OPTIONAL {
+					?o rdfs:label ?o_label.
+				}
+			}
+		}
+	'''
+.
+
+stage:WeergaveSteden a elmo:InformationProduct;
+    elmo:adapter 'dbpedia';
+    elmo:query '''
+    PREFIX onto: <http://dbpedia.org/ontology/>
+
+    CONSTRUCT { ?s foaf:name ?o_name. ?s onto:deathPlace ?o_death }
+    WHERE { ?s onto:birthPlace <@PLACE@>. ?s foaf:name ?o_name. ?s onto:deathPlace ?o_death }
+    LIMIT @LIMIT@
+'''
+.
