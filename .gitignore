@@ -3,3 +3,11 @@
 /api/target/test-classes/org/dotwebstack/data/unit/*.class
 *.class
 classes
+/api/.idea/*
+/api/target/*
+/api/filerepository/*
+/api/memorystore.data
+/api/test.data/*
+/api/test/*
+/api/testconfig/*
+/api/*.iml
