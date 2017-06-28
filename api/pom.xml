@@ -22,10 +22,11 @@
         <version>1.5.2.RELEASE</version>
     </parent>
 
-
     <properties>
         <rdf4j.version>2.2.1</rdf4j.version>
         <apache.poi.version>3.16</apache.poi.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
     </properties>
 
     <dependencies>
