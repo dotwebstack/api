@@ -25,6 +25,7 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
@@ -45,7 +46,7 @@ public class ApiConfiguration extends WebMvcConfigurerAdapter {
 
   static {
     converters = new HashMap<>();
-    //TODO: default xml rules, sparql, json rules, txt,   xmi, graphml, yed
+    //TODO: default xml rules, sparql, json rules, txt,  pdf, xmi, graphml, yed
     //see: https://github.com/architolk/Linked-Data-Theatre/blob/master/docs/Content-negotiation.md
     converters.put("html", new RdfHtmlConverter());
     converters.put("json", new RdfRioMessageConverter(RDFFormat.JSONLD));
@@ -98,7 +99,7 @@ public class ApiConfiguration extends WebMvcConfigurerAdapter {
 
     converters.add(new MappingJackson2HttpMessageConverter());
   }
-
+  
   @Autowired
   public void addResourceLoader(ResourceLoader loader) {
     for (HttpMessageConverter converter : converters.values()) {
@@ -106,5 +107,16 @@ public class ApiConfiguration extends WebMvcConfigurerAdapter {
         ((ResourceConverter) converter).setResourceLoader(loader);
       }
     }
+  }
+
+  @Override
+  public void addResourceHandlers(ResourceHandlerRegistry registry) {
+
+    registry.addResourceHandler("swagger-ui.html")
+        .addResourceLocations("classpath:/META-INF/resources/");
+
+    registry.addResourceHandler("/webjars/**")
+        .addResourceLocations("classpath:/META-INF/resources/webjars/");
+
   }
 }
