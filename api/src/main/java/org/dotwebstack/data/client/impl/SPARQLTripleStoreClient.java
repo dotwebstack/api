@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class SPARQLTripleStoreClient extends TripleStoreClientImpl<SPARQLRepository> {
 
-    @Autowired
-    public SPARQLTripleStoreClient(@Value("${sparql.init.adapterName}") String adapterName) {
-        super(adapterName);
-    }
+  @Autowired
+  public SPARQLTripleStoreClient(@Value("${sparql.init.adapterName}") String adapterName) {
+    super(adapterName);
+  }
 }

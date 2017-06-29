@@ -13,14 +13,14 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SailMemoryTestConfiguration {
 
-    @Bean
-    public SailMemoryRepository getTripleStoreRepository() {
-        return new SailMemoryRepository();
-    }
+  @Bean
+  public SailMemoryRepository getTripleStoreRepository() {
+    return new SailMemoryRepository();
+  }
 
-    @Bean
-    public SailMemoryTripleStoreClient getTripleStoreClient() {
-        return new SailMemoryTripleStoreClient();
-    }
+  @Bean
+  public SailMemoryTripleStoreClient getTripleStoreClient() {
+    return new SailMemoryTripleStoreClient();
+  }
 
 }
