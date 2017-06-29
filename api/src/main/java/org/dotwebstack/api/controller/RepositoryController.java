@@ -20,44 +20,45 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/repositories")
 public class RepositoryController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(RepositoryController.class);
 
-    private final TripleStoreClient client;
+  private static final Logger LOGGER = LoggerFactory.getLogger(RepositoryController.class);
 
-    @Autowired
-    public RepositoryController(TripleStoreClient client) {
-        this.client = client;
-    }
+  private final TripleStoreClient client;
 
-    @RequestMapping(method = RequestMethod.DELETE)
-    public ResponseEntity<Model> deleteAllData() {
-        client.clearAllTriples();
-        return ResponseEntity.ok(client.query());
-    }
+  @Autowired
+  public RepositoryController(TripleStoreClient client) {
+    this.client = client;
+  }
 
-    @RequestMapping("/insert-testdata")
-    public ResponseEntity<String> insertTest() {
+  @RequestMapping(method = RequestMethod.DELETE)
+  public ResponseEntity<Model> deleteAllData() {
+    client.clearAllTriples();
+    return ResponseEntity.ok(client.query());
+  }
 
-        ModelBuilder builder = new ModelBuilder();
+  @RequestMapping("/insert-testdata")
+  public ResponseEntity<String> insertTest() {
 
-        Model pablo = builder
-                .setNamespace("ex", "http://example.org/")
-                .subject("ex:" + "Picasso")
-                .add(RDF.TYPE, "ex:Artist")
-                .add(FOAF.LAST_NAME, "Picasso")
-                .add(FOAF.FIRST_NAME, "Pablo").build();
+    ModelBuilder builder = new ModelBuilder();
 
-        client.add(pablo);
+    Model pablo = builder
+        .setNamespace("ex", "http://example.org/")
+        .subject("ex:" + "Picasso")
+        .add(RDF.TYPE, "ex:Artist")
+        .add(FOAF.LAST_NAME, "Picasso")
+        .add(FOAF.FIRST_NAME, "Pablo").build();
 
-        Model bob = builder
-                .setNamespace("ex", "http://example.org/")
-                .subject("ex:" + "Ross")
-                .add(RDF.TYPE, "ex:Artist")
-                .add(FOAF.LAST_NAME, "Ross")
-                .add(FOAF.FIRST_NAME, "Bob").build();
+    client.add(pablo);
 
-        client.add(bob);
+    Model bob = builder
+        .setNamespace("ex", "http://example.org/")
+        .subject("ex:" + "Ross")
+        .add(RDF.TYPE, "ex:Artist")
+        .add(FOAF.LAST_NAME, "Ross")
+        .add(FOAF.FIRST_NAME, "Bob").build();
 
-        return ResponseEntity.ok("done!");
-    }
+    client.add(bob);
+
+    return ResponseEntity.ok("done!");
+  }
 }
