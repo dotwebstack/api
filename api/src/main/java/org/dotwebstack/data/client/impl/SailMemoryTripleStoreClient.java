@@ -10,7 +10,8 @@ import org.springframework.stereotype.Service;
 @Service
 @Primary
 public class SailMemoryTripleStoreClient extends TripleStoreClientImpl<SailMemoryRepository> {
-    public SailMemoryTripleStoreClient() {
-        super("Memory");
-    }
+
+  public SailMemoryTripleStoreClient() {
+    super("Memory");
+  }
 }

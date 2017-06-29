@@ -7,42 +7,42 @@ import java.util.List;
  */
 public class InformationProduct {
 
-    private final String name;
-    private String query;
-    private List<String> parameters;
-    private String adapter;
+  private final String name;
+  private String query;
+  private List<String> parameters;
+  private String adapter;
 
-    public InformationProduct(String name) {
-        this.name = name;
-        this.setQuery(getQuery());
-        this.setParameters(getParameters());
-    }
+  public InformationProduct(String name) {
+    this.name = name;
+    this.setQuery(getQuery());
+    this.setParameters(getParameters());
+  }
 
-    public String getName() {
-        return name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public String getQuery() {
-        return query;
-    }
+  public String getQuery() {
+    return query;
+  }
 
-    public String getAdapter() {
-        return adapter;
-    }
+  public void setQuery(String query) {
+    this.query = query;
+  }
 
-    public List<String> getParameters() {
-        return parameters;
-    }
+  public String getAdapter() {
+    return adapter;
+  }
 
-    public void setParameters(List<String> parameters) {
-        this.parameters = parameters;
-    }
+  public void setAdapter(String adapter) {
+    this.adapter = adapter;
+  }
 
-    public void setQuery(String query) {
-        this.query = query;
-    }
+  public List<String> getParameters() {
+    return parameters;
+  }
 
-    public void setAdapter(String adapter) {
-        this.adapter = adapter;
-    }
+  public void setParameters(List<String> parameters) {
+    this.parameters = parameters;
+  }
 }

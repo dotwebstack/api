@@ -1,5 +1,10 @@
 package org.dotwebstack.unit.api.controller;
 
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import org.dotwebstack.api.controller.ModelController;
 import org.dotwebstack.data.client.TripleStoreClient;
 import org.dotwebstack.test.categories.Categories;
@@ -14,11 +19,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 /**
  * Created by Rick Fleuren on 6/12/2017.
  */
@@ -26,85 +26,85 @@ import static org.mockito.Mockito.when;
 @Category(Categories.UnitTests.class)
 public class ModelControllerTest {
 
-    @Mock
-    TripleStoreClient client;
+  @Mock
+  TripleStoreClient client;
 
-    public void init(ModelController controller) {
-        ReflectionTestUtils.setField(controller, "defaultNamespace", "default/");
-    }
+  public void init(ModelController controller) {
+    ReflectionTestUtils.setField(controller, "defaultNamespace", "default/");
+  }
 
-    @Test
-    public void testModels() {
-        //arrange
-        LinkedHashModel model = new LinkedHashModel();
-        when(client.query()).thenReturn(model);
+  @Test
+  public void testModels() {
+    //arrange
+    LinkedHashModel model = new LinkedHashModel();
+    when(client.query()).thenReturn(model);
 
-        ModelController controller = new ModelController(client);
-        init(controller);
+    ModelController controller = new ModelController(client);
+    init(controller);
 
-        //act
-        ResponseEntity<Model> result = controller.getModels();
+    //act
+    ResponseEntity<Model> result = controller.getModels();
 
-        //assert
-        assertEquals("Models should be the same", model, result.getBody());
-        assertEquals("Status code should be 200", HttpStatus.OK, result.getStatusCode());
-    }
+    //assert
+    assertEquals("Models should be the same", model, result.getBody());
+    assertEquals("Status code should be 200", HttpStatus.OK, result.getStatusCode());
+  }
 
-    @Test
-    public void testModelBySubjectDefaultNamespace() {
-        //arrange
-        LinkedHashModel model = new LinkedHashModel();
-        when(client.queryBySubject(eq("default/subject"))).thenReturn(model);
-        ModelController controller = new ModelController(client);
-        init(controller);
+  @Test
+  public void testModelBySubjectDefaultNamespace() {
+    //arrange
+    LinkedHashModel model = new LinkedHashModel();
+    when(client.queryBySubject(eq("default/subject"))).thenReturn(model);
+    ModelController controller = new ModelController(client);
+    init(controller);
 
-        //act
-        ResponseEntity<Model> result = controller.getModel("subject", null);
+    //act
+    ResponseEntity<Model> result = controller.getModel("subject", null);
 
-        //assert
-        assertEquals("Models should be the same", model, result.getBody());
-        assertEquals("Status code should be 200", HttpStatus.OK, result.getStatusCode());
-    }
+    //assert
+    assertEquals("Models should be the same", model, result.getBody());
+    assertEquals("Status code should be 200", HttpStatus.OK, result.getStatusCode());
+  }
 
-    @Test
-    public void testModelBySubject() {
-        //arrange
-        LinkedHashModel model = new LinkedHashModel();
-        when(client.queryBySubject(eq("myNamespace/subject"))).thenReturn(model);
-        ModelController controller = new ModelController(client);
-        init(controller);
+  @Test
+  public void testModelBySubject() {
+    //arrange
+    LinkedHashModel model = new LinkedHashModel();
+    when(client.queryBySubject(eq("myNamespace/subject"))).thenReturn(model);
+    ModelController controller = new ModelController(client);
+    init(controller);
 
-        //act
-        ResponseEntity<Model> result = controller.getModel("subject", "myNamespace/");
+    //act
+    ResponseEntity<Model> result = controller.getModel("subject", "myNamespace/");
 
-        //assert
-        assertEquals("Models should be the same", model, result.getBody());
-        assertEquals("Status code should be 200", HttpStatus.OK, result.getStatusCode());
-    }
+    //assert
+    assertEquals("Models should be the same", model, result.getBody());
+    assertEquals("Status code should be 200", HttpStatus.OK, result.getStatusCode());
+  }
 
-    @Test
-    public void testDeleteBySubjectDefaultNamespace() {
-        //arrange
-        ModelController controller = new ModelController(client);
-        init(controller);
+  @Test
+  public void testDeleteBySubjectDefaultNamespace() {
+    //arrange
+    ModelController controller = new ModelController(client);
+    init(controller);
 
-        //act
-        controller.deleteModel("subject", null);
+    //act
+    controller.deleteModel("subject", null);
 
-        //assert
-        verify(client).deleteBySubject("default/subject");
-    }
+    //assert
+    verify(client).deleteBySubject("default/subject");
+  }
 
-    @Test
-    public void testDeleteBySubject() {
-        //arrange
-        ModelController controller = new ModelController(client);
-        init(controller);
+  @Test
+  public void testDeleteBySubject() {
+    //arrange
+    ModelController controller = new ModelController(client);
+    init(controller);
 
-        //act
-        controller.deleteModel("subject", "myNamespace/");
+    //act
+    controller.deleteModel("subject", "myNamespace/");
 
-        //assert
-        verify(client).deleteBySubject("myNamespace/subject");
-    }
+    //assert
+    verify(client).deleteBySubject("myNamespace/subject");
+  }
 }

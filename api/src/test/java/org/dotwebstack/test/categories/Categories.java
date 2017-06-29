@@ -5,9 +5,12 @@ package org.dotwebstack.test.categories;
  */
 
 public class Categories {
-    public interface IntegrationTests {
-    }
 
-    public interface UnitTests {
-    }
+  public interface IntegrationTests {
+
+  }
+
+  public interface UnitTests {
+
+  }
 }
