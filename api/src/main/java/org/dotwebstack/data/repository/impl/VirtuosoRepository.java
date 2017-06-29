@@ -12,19 +12,19 @@ import org.springframework.stereotype.Repository;
 //@Primary
 public class VirtuosoRepository extends Rdf4JRepository {
 
-    private final virtuoso.rdf4j.driver.VirtuosoRepository repository;
+  private final virtuoso.rdf4j.driver.VirtuosoRepository repository;
 
-    @Autowired
-    public VirtuosoRepository(@Value("${virtuoso.connection.url}") String url,
-                              @Value("${virtuoso.connection.user}") String user,
-                              @Value("${virtuoso.connection.password}") String password,
-                              @Value("${virtuoso.default.graph}") String graph) {
-        repository = new virtuoso.rdf4j.driver.VirtuosoRepository(url, user, password, graph);
-        repository.initialize();
-    }
+  @Autowired
+  public VirtuosoRepository(@Value("${virtuoso.connection.url}") String url,
+      @Value("${virtuoso.connection.user}") String user,
+      @Value("${virtuoso.connection.password}") String password,
+      @Value("${virtuoso.default.graph}") String graph) {
+    repository = new virtuoso.rdf4j.driver.VirtuosoRepository(url, user, password, graph);
+    repository.initialize();
+  }
 
-    @Override
-    public org.eclipse.rdf4j.repository.Repository getRepository() {
-        return repository;
-    }
+  @Override
+  public org.eclipse.rdf4j.repository.Repository getRepository() {
+    return repository;
+  }
 }
