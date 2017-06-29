@@ -1,0 +1,458 @@
+{
+	"variables": [],
+	"info": {
+		"name": "dotwebstack",
+		"_postman_id": "beaa6000-c663-3c55-f479-bd46c0be6f29",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "InformationProduct",
+			"description": "",
+			"item": [
+				{
+					"name": "Get information products",
+					"request": {
+						"url": {
+							"raw": "http://localhost:8080/api/v1/models/Dali?namespace=http://example.es/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"models",
+								"Dali"
+							],
+							"query": [
+								{
+									"key": "namespace",
+									"value": "http://example.es/",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get information products by Name",
+					"request": {
+						"url": {
+							"raw": "http://localhost:8080/api/v1/informationproducts/WeergaveTripleQuery?namespace=http://localhost:8080/myStage%23",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"informationproducts",
+								"WeergaveTripleQuery"
+							],
+							"query": [
+								{
+									"key": "namespace",
+									"value": "http://localhost:8080/myStage%23",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Query information products errort",
+					"request": {
+						"url": {
+							"raw": "http://localhost:8080/api/v1/informationproducts/WeergaveTripleQuery/query?namespace=http://localhost:8080/myStage%23",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"informationproducts",
+								"WeergaveTripleQuery",
+								"query"
+							],
+							"query": [
+								{
+									"key": "namespace",
+									"value": "http://localhost:8080/myStage%23",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Query information products ",
+					"request": {
+						"url": {
+							"raw": "http://localhost:8080/api/v1/informationproducts/WeergaveTripleQuery/query?namespace=http://localhost:8080/myStage%23&SUBJECT=http://localhost:8080/myStage%23Bla",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"informationproducts",
+								"WeergaveTripleQuery",
+								"query"
+							],
+							"query": [
+								{
+									"key": "namespace",
+									"value": "http://localhost:8080/myStage%23",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "SUBJECT",
+									"value": "http://localhost:8080/myStage%23Bla",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Model",
+			"description": "",
+			"item": [
+				{
+					"name": "Clear all data",
+					"request": {
+						"url": "http://localhost:8080/api/v1/repositories",
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Insert test-data",
+					"request": {
+						"url": "http://localhost:8080/api/v1/repositories/insert-testdata",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get all models JSON-LD",
+					"request": {
+						"url": "http://localhost:8080/api/v1/models",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get all models TTL",
+					"request": {
+						"url": "http://localhost:8080/api/v1/models.ttl",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get all models XML",
+					"request": {
+						"url": "http://localhost:8080/api/v1/models.xml",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get all models RDF-JSON",
+					"request": {
+						"url": "http://localhost:8080/api/v1/models.rdf-json",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get all models n-triple",
+					"request": {
+						"url": "http://localhost:8080/api/v1/models.n-triple",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Picasso",
+					"request": {
+						"url": "http://localhost:8080/api/v1/models/Picasso",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Picasso TTL",
+					"request": {
+						"url": "http://localhost:8080/api/v1/models/Picasso.ttl",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Ross ",
+					"request": {
+						"url": "http://localhost:8080/api/v1/models/Ross",
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "POST Ross TTL",
+					"request": {
+						"url": "http://localhost:8080/api/v1/models.ttl",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/turtle",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<http://example.org/Ross> a <http://example.org/Artist> ;\r\n\t<http://xmlns.com/foaf/0.1/firstName> \"Bob\" ;\r\n\t<http://xmlns.com/foaf/0.1/knows> <http://example.org/Picasso> ;\r\n\t<http://xmlns.com/foaf/0.1/lastName> \"Rosssss\" ."
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH Ross TTL",
+					"request": {
+						"url": "http://localhost:8080/api/v1/models.ttl",
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/turtle",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<http://example.org/Ross> a <http://example.org/Artist> ;\r\n\t<http://xmlns.com/foaf/0.1/firstName> \"Bob\" ;\r\n\t<http://xmlns.com/foaf/0.1/lastName> \"Ross_the_Boss\" ."
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "POST Rembrandt XML",
+					"request": {
+						"url": "http://localhost:8080/api/v1/models.xml",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/rdf+xml",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\r\n<rdf:RDF xmlns:foaf=\"http://xmlns.com/foaf/0.1/\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\">\r\n\t<rdf:Description rdf:about=\"http://example.org/vanRijn\">\r\n\t\t<rdf:type rdf:resource=\"http://example.org/Artist\" />\r\n\t\t<foaf:firstName rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">Rembrandt</foaf:firstName>\r\n\t\t<foaf:lastName rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">van Rijn</foaf:lastName>\r\n\t</rdf:Description>\r\n</rdf:RDF>"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "POST Mondriaan JSON-LD",
+					"request": {
+						"url": "http://localhost:8080/api/v1/models.xml",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/ld+json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\r\n\t\t\"@id\": \"http://example.org/Picasso\",\r\n\t\t\"@type\": [\r\n\t\t\t\"http://example.org/Artist\"\r\n\t\t],\r\n\t\t\"http://xmlns.com/foaf/0.1/firstName\": [{\r\n\t\t\t\t\"@value\": \"Pablo\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"http://xmlns.com/foaf/0.1/lastName\": [{\r\n\t\t\t\t\"@value\": \"Picasso\"\r\n\t\t\t}\r\n\t\t]\r\n\t}, {\r\n\t\t\"@id\": \"http://example.org/Mondriaan\",\r\n\t\t\"@type\": [\r\n\t\t\t\"http://example.org/Artist\"\r\n\t\t],\r\n\t\t\"http://xmlns.com/foaf/0.1/firstName\": [{\r\n\t\t\t\t\"@value\": \"Piet\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"http://xmlns.com/foaf/0.1/lastName\": [{\r\n\t\t\t\t\"@value\": \"Mondriaan\"\r\n\t\t\t}\r\n\t\t]\r\n\t}\r\n]\r\n"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "POST Mondriaan JSON-LD, get TTL",
+					"request": {
+						"url": "http://localhost:8080/api/v1/models.ttl",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/ld+json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\r\n\t\t\"@id\": \"http://example.org/Picasso\",\r\n\t\t\"@type\": [\r\n\t\t\t\"http://example.org/Artist\"\r\n\t\t],\r\n\t\t\"http://xmlns.com/foaf/0.1/firstName\": [{\r\n\t\t\t\t\"@value\": \"Pablo\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"http://xmlns.com/foaf/0.1/lastName\": [{\r\n\t\t\t\t\"@value\": \"Picasso\"\r\n\t\t\t}\r\n\t\t]\r\n\t}, {\r\n\t\t\"@id\": \"http://example.org/Mondriaan\",\r\n\t\t\"@type\": [\r\n\t\t\t\"http://example.org/Artist\"\r\n\t\t],\r\n\t\t\"http://xmlns.com/foaf/0.1/firstName\": [{\r\n\t\t\t\t\"@value\": \"Piet\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"http://xmlns.com/foaf/0.1/lastName\": [{\r\n\t\t\t\t\"@value\": \"Mondriaan\"\r\n\t\t\t}\r\n\t\t]\r\n\t}\r\n]\r\n"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "POST vanGogh n-triple",
+					"request": {
+						"url": "http://localhost:8080/api/v1/models.n-triple",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/n-triples",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<http://example.org/vanGogh> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.org/Artist> .\r\n<http://example.org/vanGogh> <http://xmlns.com/foaf/0.1/firstName> \"Vincent\" .\r\n<http://example.org/vanGogh> <http://xmlns.com/foaf/0.1/lastName> \"van Gogh\" ."
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "POST Dali TTL",
+					"request": {
+						"url": "http://localhost:8080/api/v1/models.ttl",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/turtle",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<http://example.es/Dali> a <http://example.org/Artist> ;\r\n\t<http://xmlns.com/foaf/0.1/firstName> \"Salvador\" ;\r\n\t<http://xmlns.com/foaf/0.1/knows> <http://example.org/Picasso> ;\r\n\t<http://xmlns.com/foaf/0.1/lastName> \"Dali\" ."
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Dali with namespace",
+					"request": {
+						"url": {
+							"raw": "http://localhost:8080/api/v1/models/Dali?namespace=http://example.es/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"models",
+								"Dali"
+							],
+							"query": [
+								{
+									"key": "namespace",
+									"value": "http://example.es/",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
