@@ -41,7 +41,7 @@ public class ApiConfiguration extends WebMvcConfigurerAdapter {
 
     static {
         converters = new HashMap<>();
-        //TODO: default xml rules, sparql, json rules, txt,  pdf, xmi, graphml, yed
+        //TODO: default xml rules, sparql, json rules, txt,   xmi, graphml, yed
         //see: https://github.com/architolk/Linked-Data-Theatre/blob/master/docs/Content-negotiation.md
         converters.put("html", new RdfHtmlConverter());
         converters.put("json", new RdfRioMessageConverter(RDFFormat.JSONLD));
