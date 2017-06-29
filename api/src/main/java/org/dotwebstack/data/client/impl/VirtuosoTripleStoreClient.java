@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class VirtuosoTripleStoreClient extends TripleStoreClientImpl<VirtuosoRepository> {
-    public VirtuosoTripleStoreClient() {
-        super("virtuoso");
-    }
+
+  public VirtuosoTripleStoreClient() {
+    super("virtuoso");
+  }
 }

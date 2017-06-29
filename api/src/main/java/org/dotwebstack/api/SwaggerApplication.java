@@ -12,13 +12,13 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerApplication {
 
-        @Bean
-        public Docket swaggerSettings() {
-                return new Docket(DocumentationType.SWAGGER_2)
-                        .select()
-                        .apis(RequestHandlerSelectors.basePackage("org.dotwebstack.api.controller"))
-                        .paths(PathSelectors.any())
-                        .build()
-                        .pathMapping("/");
-        }
+  @Bean
+  public Docket swaggerSettings() {
+    return new Docket(DocumentationType.SWAGGER_2)
+        .select()
+        .apis(RequestHandlerSelectors.basePackage("org.dotwebstack.api.controller"))
+        .paths(PathSelectors.any())
+        .build()
+        .pathMapping("/");
+  }
 }
