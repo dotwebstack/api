@@ -81,9 +81,8 @@ public class QueryUtils {
   }
 
   public static boolean isURI(String uri) {
-    final URL url;
     try {
-      url = new URL(uri);
+      new URL(uri);
     } catch (Exception e1) {
       return false;
     }

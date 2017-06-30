@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Optional;
 import org.dotwebstack.data.utils.ModelUtils;
+import org.dotwebstack.data.utils.helper.Subject;
 import org.eclipse.rdf4j.model.Model;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
@@ -56,12 +58,33 @@ public class RdfGraphmlConverter extends WriteOnlyRdfConverter {
         .attr("id", "G")
         .attr("edgedefault", "directed");
 
-    List<Model> models = ModelUtils.filterBySubject(statements);
-    for (Model model : models) {
+    List<Subject> subjects = ModelUtils.extractHelpers(statements);
+    for (Subject model : subjects) {
       Directives node = directives.add("node");
+
+      Optional<String> about = model.getValue("rdf:about");
+      Optional<String> nodeId = model.getValue("rdf:nodeID");
+      String id = nodeId.orElse("") + about.orElse("");
+      node.attr("id", id);
+
+      if (about.isPresent()) {
+        node.add("data")
+            .attr("key", "uri")
+            .set(about.get())
+            .up();
+      }
+
+      String label = model.getValue("rdfs:label")
+          .orElse(about.map(s -> s.substring(s.lastIndexOf("#"))).orElse(""));
+
+      node.add("data")
+          .attr("key", "label")
+          .set(label)
+          .up();
 
       node.up();
     }
+
     return directives;
   }
 
