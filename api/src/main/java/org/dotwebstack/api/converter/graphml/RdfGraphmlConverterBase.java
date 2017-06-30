@@ -1,4 +1,4 @@
-package org.dotwebstack.api.converter;
+package org.dotwebstack.api.converter.graphml;
 
 import static java.util.stream.Collectors.toList;
 import static org.dotwebstack.data.utils.ModelUtils.extractHelpers;
@@ -9,6 +9,7 @@ import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Optional;
+import org.dotwebstack.api.converter.WriteOnlyRdfConverter;
 import org.dotwebstack.data.utils.helper.Subject;
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Model;
@@ -20,21 +21,29 @@ import org.xembly.Directives;
 import org.xembly.ImpossibleModificationException;
 import org.xembly.Xembler;
 
-
 /**
- * Created by Rick Fleuren on 6/26/2017.
+ * Created by Rick Fleuren on 6/30/2017.
  */
-public class RdfGraphmlConverter extends WriteOnlyRdfConverter {
+public abstract class RdfGraphmlConverterBase extends WriteOnlyRdfConverter {
 
-  public RdfGraphmlConverter() {
-    super(MediaType.valueOf("application/graphml+xml"));
+  protected RdfGraphmlConverterBase(MediaType mediaType) {
+    super(mediaType);
   }
+
+  protected abstract void handleKey(Directives key, String name, String forString);
+
+  protected abstract void handleNode(Directives node, String label);
+
+  protected abstract void handleEdge(Directives edge, String label);
+
+  protected abstract void enrichGraphNode(Directives directives);
 
   @Override
   protected void writeInternal(Model statements, HttpOutputMessage httpOutputMessage)
       throws IOException, HttpMessageNotWritableException {
 
-    Directives directives = buildXml(statements);
+    List<Subject> subjects = extractHelpers(statements);
+    Directives directives = buildXml(subjects);
 
     try {
       String xml = new Xembler(directives).xml();
@@ -50,16 +59,14 @@ public class RdfGraphmlConverter extends WriteOnlyRdfConverter {
     }
   }
 
-  private Directives buildXml(Model statements) {
-    List<Subject> subjects = extractHelpers(statements);
+  private Directives buildXml(List<Subject> subjects) {
 
     Directives directives = new Directives();
     directives.add("graphml")
         .attr("xmlns", "http://graphml.graphdrawing.org/xmlns")
-        .attr("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance")
-        .attr("xmlns:y", "http://www.yworks.com/xml/graphml")
-        .attr("xsi:schemaLocation",
-            "http://graphml.graphdrawing.org/xmlns http://www.yworks.com/xml/schema/graphml/1.0/ygraphml.xsd");
+        .attr("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
+
+    enrichGraphNode(directives);
 
     addKeysToXml(subjects, directives);
 
@@ -91,13 +98,9 @@ public class RdfGraphmlConverter extends WriteOnlyRdfConverter {
       String label = model.getStringValue("rdfs:label")
           .orElse(index == -1 ? about : about.substring(index));
 
-      node.add("data").attr("key", "label")
-          .add("y:ShapeNode")
-          .add("y:NodeLabel")
-          .set(label)
-          .up()
-          .up()
-          .up();
+      node.add("data").attr("key", "label");
+      handleNode(node, label);
+      node.up();
 
       node.up();
     }
@@ -130,12 +133,11 @@ public class RdfGraphmlConverter extends WriteOnlyRdfConverter {
                       .set(predicate)
                       .up()
                       .add("data")
-                      .attr("key", "label")
-                      .add("y:PolyLineEdge")
-                      .add("y:EdgeLabel")
-                      .set(flatPredicate)
-                      .up()
-                      .up()
+                      .attr("key", "label");
+
+                  handleEdge(directives, flatPredicate);
+
+                  directives
                       .up()
                       .up();
                 }
@@ -145,10 +147,10 @@ public class RdfGraphmlConverter extends WriteOnlyRdfConverter {
   }
 
   private void addKeysToXml(List<Subject> subjects, Directives directives) {
-    addKey(directives, "uri", "node", null);
-    addKey(directives, "label", "node", "nodegraphics");
-    addKey(directives, "uri", "edge", null);
-    addKey(directives, "label", "edge", "edgegraphics");
+    addKey(directives, "uri", "node");
+    addKey(directives, "label", "node");
+    addKey(directives, "uri", "edge");
+    addKey(directives, "label", "edge");
 
     List<String> distinctPredicates = subjects.stream()
         .flatMap(s -> s.getPredicates().stream().filter(p -> !s.isIRI(p)))
@@ -170,16 +172,15 @@ public class RdfGraphmlConverter extends WriteOnlyRdfConverter {
     return flatUri.replace(':', '-');
   }
 
-  private void addKey(Directives directives, String name, String forString, String yFilesType) {
+  private void addKey(Directives directives, String name, String forString) {
     directives.add("key")
         .attr("id", name)
         .attr("for", forString)
         .attr("attr.name", name)
         .attr("attr.type", "string");
 
-    if (yFilesType != null) {
-      directives.attr("yfiles.type", yFilesType);
-    }
+    handleKey(directives, name, forString);
     directives.up();
   }
+
 }

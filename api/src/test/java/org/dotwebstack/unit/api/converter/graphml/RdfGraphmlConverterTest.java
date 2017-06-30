@@ -1,4 +1,4 @@
-package org.dotwebstack.unit.api.converter;
+package org.dotwebstack.unit.api.converter.graphml;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.dotwebstack.utils.TestUtils.createArtist;
@@ -10,7 +10,7 @@ import static org.mockito.Mockito.when;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import org.dotwebstack.api.converter.RdfGraphmlConverter;
+import org.dotwebstack.api.converter.graphml.RdfGraphmlConverter;
 import org.dotwebstack.test.categories.Categories;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.impl.LinkedHashModel;
