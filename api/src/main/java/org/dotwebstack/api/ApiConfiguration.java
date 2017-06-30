@@ -62,6 +62,7 @@ public class ApiConfiguration extends WebMvcConfigurerAdapter {
     converters.put("csv", new RdfCsvConverter());
     converters.put("pdf", new RdfPdfConverter());
     converters.put("graphml", new RdfGraphmlConverter());
+    converters.put("txt", new RdfTextConverter());
 
     //office
     converters.put("xls", new RdfExcelConverter());
@@ -100,7 +101,7 @@ public class ApiConfiguration extends WebMvcConfigurerAdapter {
 
     converters.add(new MappingJackson2HttpMessageConverter());
   }
-  
+
   @Autowired
   public void addResourceLoader(ResourceLoader loader) {
     for (HttpMessageConverter converter : converters.values()) {
