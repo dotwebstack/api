@@ -7,6 +7,7 @@ import org.dotwebstack.api.converter.RdfGraphmlConverter;
 import org.dotwebstack.api.converter.RdfHtmlConverter;
 import org.dotwebstack.api.converter.RdfPdfConverter;
 import org.dotwebstack.api.converter.RdfRioMessageConverter;
+import org.dotwebstack.api.converter.RdfTextConverter;
 import org.dotwebstack.api.converter.ResourceConverter;
 import org.dotwebstack.api.converter.office.RdfExcelConverter;
 import org.dotwebstack.api.converter.office.RdfExcelOpenXmlConverter;
