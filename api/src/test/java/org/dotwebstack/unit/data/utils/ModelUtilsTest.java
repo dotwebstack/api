@@ -40,9 +40,9 @@ public class ModelUtilsTest {
     assertEquals("Should be picasso subject", "http://example.org/pablo", pablo.getSubject());
 
     assertEquals("Should be picasso name with full namespace", "pablo",
-        pablo.getValue("http://xmlns.com/foaf/0.1/lastName").get());
+        pablo.getStringValue("http://xmlns.com/foaf/0.1/lastName").get());
     assertEquals("Should be artist type with full namespace", "http://example.org/Artist",
-        pablo.getValue("http://www.w3.org/1999/02/22-rdf-syntax-ns#type").get());
+        pablo.getStringValue("http://www.w3.org/1999/02/22-rdf-syntax-ns#type").get());
 
   }
 
