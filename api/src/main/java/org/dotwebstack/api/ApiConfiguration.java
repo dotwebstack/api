@@ -6,6 +6,7 @@ import org.dotwebstack.api.converter.RdfCsvConverter;
 import org.dotwebstack.api.converter.RdfHtmlConverter;
 import org.dotwebstack.api.converter.RdfPdfConverter;
 import org.dotwebstack.api.converter.RdfRioMessageConverter;
+import org.dotwebstack.api.converter.RdfTextConverter;
 import org.dotwebstack.api.converter.ResourceConverter;
 import org.dotwebstack.api.converter.graphml.RdfGraphmlConverter;
 import org.dotwebstack.api.converter.graphml.RdfYedConverter;
@@ -62,6 +63,7 @@ public class ApiConfiguration extends WebMvcConfigurerAdapter {
     converters.put("csv", new RdfCsvConverter());
     converters.put("pdf", new RdfPdfConverter());
     converters.put("graphml", new RdfGraphmlConverter());
+    converters.put("txt", new RdfTextConverter());
     converters.put("yed", new RdfYedConverter());
 
     //office
