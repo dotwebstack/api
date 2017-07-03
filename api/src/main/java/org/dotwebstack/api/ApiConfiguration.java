@@ -7,6 +7,7 @@ import org.dotwebstack.api.converter.RdfGraphmlConverter;
 import org.dotwebstack.api.converter.RdfHtmlConverter;
 import org.dotwebstack.api.converter.RdfPdfConverter;
 import org.dotwebstack.api.converter.RdfRioMessageConverter;
+import org.dotwebstack.api.converter.RdfTextConverter;
 import org.dotwebstack.api.converter.ResourceConverter;
 import org.dotwebstack.api.converter.office.RdfExcelConverter;
 import org.dotwebstack.api.converter.office.RdfExcelOpenXmlConverter;
@@ -61,6 +62,7 @@ public class ApiConfiguration extends WebMvcConfigurerAdapter {
     converters.put("csv", new RdfCsvConverter());
     converters.put("pdf", new RdfPdfConverter());
     converters.put("graphml", new RdfGraphmlConverter());
+    converters.put("txt", new RdfTextConverter());
 
     //office
     converters.put("xls", new RdfExcelConverter());
@@ -99,7 +101,7 @@ public class ApiConfiguration extends WebMvcConfigurerAdapter {
 
     converters.add(new MappingJackson2HttpMessageConverter());
   }
-  
+
   @Autowired
   public void addResourceLoader(ResourceLoader loader) {
     for (HttpMessageConverter converter : converters.values()) {

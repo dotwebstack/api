@@ -12,3 +12,5 @@ api/test.data/*
 api/test/*
 api/testconfig/*
 /api/*.iml
+filerepository/*
+memorystore.data
