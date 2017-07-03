@@ -3,12 +3,13 @@ package org.dotwebstack.api;
 import java.util.HashMap;
 import java.util.List;
 import org.dotwebstack.api.converter.RdfCsvConverter;
-import org.dotwebstack.api.converter.RdfGraphmlConverter;
 import org.dotwebstack.api.converter.RdfHtmlConverter;
 import org.dotwebstack.api.converter.RdfPdfConverter;
 import org.dotwebstack.api.converter.RdfRioMessageConverter;
 import org.dotwebstack.api.converter.RdfTextConverter;
 import org.dotwebstack.api.converter.ResourceConverter;
+import org.dotwebstack.api.converter.graphml.RdfGraphmlConverter;
+import org.dotwebstack.api.converter.graphml.RdfYedConverter;
 import org.dotwebstack.api.converter.office.RdfExcelConverter;
 import org.dotwebstack.api.converter.office.RdfExcelOpenXmlConverter;
 import org.dotwebstack.api.converter.office.RdfWordConverter;
@@ -63,6 +64,7 @@ public class ApiConfiguration extends WebMvcConfigurerAdapter {
     converters.put("pdf", new RdfPdfConverter());
     converters.put("graphml", new RdfGraphmlConverter());
     converters.put("txt", new RdfTextConverter());
+    converters.put("yed", new RdfYedConverter());
 
     //office
     converters.put("xls", new RdfExcelConverter());

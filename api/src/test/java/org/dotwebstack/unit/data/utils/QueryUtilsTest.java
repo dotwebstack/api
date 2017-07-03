@@ -102,9 +102,85 @@ public class QueryUtilsTest {
     assertEquals("Should be ignored", "http://example.org/", result);
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void testExpandUnknownPrefix() {
+  @Test
+  public void testFlattenNull() {
     //act
-    QueryUtils.expand("unknown:String");
+    String result = QueryUtils.flatten(null);
+
+    //assert
+    assertNull("No prefix should be added", result);
+  }
+
+  @Test
+  public void testFlattenNoUri() {
+    //act
+    String result = QueryUtils.flatten("String");
+
+    //assert
+    assertEquals("No prefix should be added", "String", result);
+  }
+
+  @Test
+  public void testFlattenReplacePrefix() {
+    //act
+    String result = QueryUtils.flatten("http://bp4mc2.org/elmo/def#String");
+
+    //assert
+    assertEquals("Prefix should be replaced", "elmo:String", result);
+  }
+
+  @Test
+  public void testGetNamespaceNull() {
+    //act
+    String namespace = QueryUtils.getNamespace(null);
+
+    //assert
+    assertNull("No namespace should be added", namespace);
+  }
+
+  @Test
+  public void testGetNamespaceNoUri() {
+    //act
+    String namespace = QueryUtils.getNamespace("myString");
+
+    //assert
+    assertEquals("No namespace should be added", "myString", namespace);
+  }
+
+  @Test
+  public void testGetNamespaceHash() {
+    //act
+    String namespace = QueryUtils.getNamespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#about");
+
+    //assert
+    assertEquals("Namespace should be found", "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        namespace);
+  }
+
+  @Test
+  public void testGetNamespaceSlash() {
+    //act
+    String namespace = QueryUtils.getNamespace("http://id.loc.gov/vocabulary/iso639-1/about");
+
+    //assert
+    assertEquals("Namespace should be found", "http://id.loc.gov/vocabulary/iso639-1/",
+        namespace);
+  }
+
+  @Test
+  public void testGetNamespaceHashNSlash() {
+    //act
+    String namespace = QueryUtils.getNamespace("http://id.loc.gov/vocabulary/iso639-1/#about");
+
+    //assert
+    assertEquals("Namespace should be found", "http://id.loc.gov/vocabulary/iso639-1/#",
+        namespace);
+  }
+
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testExpandUnknownNamespace() {
+    //act
+    QueryUtils.expand("ex:String");
   }
 }
