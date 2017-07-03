@@ -25,9 +25,9 @@ public class RdfTextConverter extends WriteOnlyRdfConverter {
     try (OutputStreamWriter outputStreamWriter = new OutputStreamWriter(httpOutputMessage.getBody(),
         StandardCharsets.UTF_8)) {
       for (Statement statement : statements) {
-        outputStreamWriter.write("\n" +
-            statement.getSubject().stringValue() + "\n" + statement.getPredicate().stringValue()
-            + "\n" + statement.getObject().stringValue() + "\n");
+        outputStreamWriter.write(
+            statement.getSubject().stringValue() + " " + statement.getPredicate().stringValue()
+                + " " + statement.getObject().stringValue() + "\n");
       }
 
     }
