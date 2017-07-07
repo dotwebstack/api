@@ -32,15 +32,18 @@ public abstract class RdfGraphmlConverterBase extends WriteOnlyRdfConverter {
 
   protected abstract void handleKey(Directives key, String name, String forString);
 
-  protected abstract void handleNode(Directives node, String label);
+  protected abstract void handleNode(Directives node,
+      Subject model, String label);
 
-  protected abstract void handleEdge(Directives edge, String label);
+  protected abstract void handleEdge(Directives edge, String label, String source, String target);
 
   protected abstract void enrichGraphNode(Directives directives);
 
   @Override
   protected void writeInternal(Model statements, HttpOutputMessage httpOutputMessage)
       throws IOException, HttpMessageNotWritableException {
+    httpOutputMessage.getHeaders()
+        .add("Content-Disposition", "attachment; filename=diagram.graphml");
 
     List<Subject> subjects = extractHelpers(statements);
     Directives directives = buildXml(subjects);
@@ -99,7 +102,7 @@ public abstract class RdfGraphmlConverterBase extends WriteOnlyRdfConverter {
           .orElse(index == -1 ? about : about.substring(index));
 
       node.add("data").attr("key", "label");
-      handleNode(node, label);
+      handleNode(node, model, label);
       node.up();
 
       node.up();
@@ -135,7 +138,7 @@ public abstract class RdfGraphmlConverterBase extends WriteOnlyRdfConverter {
                       .add("data")
                       .attr("key", "label");
 
-                  handleEdge(directives, flatPredicate);
+                  handleEdge(directives, flatPredicate, model.getSubject(), s.stringValue());
 
                   directives
                       .up()
