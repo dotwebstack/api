@@ -177,7 +177,7 @@ public class RdfYedConverterTest {
     assertTrue("Should contain edgegraphics in the keys",
         xml.contains("yfiles.type=\"edgegraphics"));
 
-    assertTrue("Should contain node enriched data", xml.contains("<y:ShapeNode"));
+    assertTrue("Should contain node enriched data", xml.contains("<y:GenericNode"));
     assertTrue("Should contain edge enriched data", xml.contains("<y:PolyLineEdge"));
   }
 
