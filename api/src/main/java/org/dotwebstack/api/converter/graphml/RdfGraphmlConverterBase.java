@@ -33,7 +33,7 @@ public abstract class RdfGraphmlConverterBase extends WriteOnlyRdfConverter {
   protected abstract void handleKey(Directives key, String name, String forString);
 
   protected abstract void handleNode(Directives node,
-      Subject model, String label);
+      Subject model, String label, List<String> allSubjects);
 
   protected abstract void handleEdge(Directives edge, String label, String source, String target);
 
@@ -82,6 +82,7 @@ public abstract class RdfGraphmlConverterBase extends WriteOnlyRdfConverter {
   }
 
   private void addNodes(List<Subject> subjects, Directives directives) {
+    List<String> allSubjects = subjects.stream().map(Subject::getSubject).collect(toList());
     for (Subject model : subjects) {
       Directives node = directives.add("node");
 
@@ -102,7 +103,7 @@ public abstract class RdfGraphmlConverterBase extends WriteOnlyRdfConverter {
           .orElse(index == -1 ? about : about.substring(index));
 
       node.add("data").attr("key", "label");
-      handleNode(node, model, label);
+      handleNode(node, model, label, allSubjects);
       node.up();
 
       node.up();

@@ -1,5 +1,6 @@
 package org.dotwebstack.api.converter.graphml;
 
+import java.util.List;
 import org.dotwebstack.data.utils.helper.Subject;
 import org.springframework.http.MediaType;
 import org.xembly.Directives;
@@ -28,7 +29,7 @@ public class RdfGraphmlConverter extends RdfGraphmlConverterBase {
 
   @Override
   protected void handleNode(Directives node, Subject model,
-      String label) {
+      String label, List<String> allSubjects) {
     node.set(label);
   }
 

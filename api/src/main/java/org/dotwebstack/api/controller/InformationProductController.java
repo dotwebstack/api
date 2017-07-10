@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * Created by Rick Fleuren on 6/12/2017.
  */
 @Controller
-@RequestMapping("/{staging}/api/v1/informationproducts")
+@RequestMapping("/api/v1/informationproducts")
 public class InformationProductController {
 
   private final InformationProductService service;
